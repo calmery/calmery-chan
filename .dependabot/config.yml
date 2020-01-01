@@ -1,0 +1,7 @@
+version: 1
+
+update_configs:
+  - directory: "/"
+    package_manager: "javascript"
+    target_branch: "master"
+    update_schedule: "live"

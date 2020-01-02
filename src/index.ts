@@ -13,6 +13,10 @@ const checkSecretToken = (request: NowRequest): boolean => {
     throw new Error("GITHUB_WEBHOOK_SECRET is not defined");
   }
 
+  if (request.body === undefined) {
+    return false;
+  }
+
   const checksum = request.headers["x-hub-signature"];
   const digest = `sha1=${crypto
     .createHmac("sha1", GITHUB_WEBHOOK_SECRET)

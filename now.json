@@ -5,6 +5,10 @@
       "use": "@now/node"
     }
   ],
+  "env": {
+    "GITHUB_PERSONAL_ACCESS_TOKEN": "@github_personal_access_token",
+    "GITHUB_WEBHOOK_SECRET": "@github_webhook_secret"
+  },
   "routes": [
     {
       "dest": "src/index.ts",

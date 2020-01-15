@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@octokit/plugin-retry": "2.2.0",
+    "@octokit/plugin-retry": "3.0.0",
     "@octokit/plugin-throttling": "2.7.1",
     "@octokit/rest": "16.36.0",
     "@octokit/webhooks": "7.0.0"

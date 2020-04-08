@@ -8,7 +8,7 @@
 
 ## Usage
 
-Install Node.js v12.13.1 and npm 6.12.1.
+Install Node.js v12.16.1 and npm 6.14.4.
 
 Using `now.sh` in this project. See the following documentation.<br />
 [Now for GitHub - ZEIT Documentation](https://zeit.co/docs/v2/more/now-for-github)

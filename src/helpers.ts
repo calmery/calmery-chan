@@ -3,20 +3,20 @@ import { throttling } from "@octokit/plugin-throttling";
 import Octokit from "@octokit/rest";
 import {
   WebhookPayloadIssues,
-  WebhookPayloadPullRequest
+  WebhookPayloadPullRequest,
 } from "@octokit/webhooks";
 import {
   GITHUB_PERSONAL_ACCESS_TOKEN,
   ON_CREATE_ISSUE_COMMENT,
   ON_CREATE_PR_COMMENT,
-  REPOSITORY_OWNER_ID
+  REPOSITORY_OWNER_ID,
 } from "./constants";
 
 const octokit = new (Octokit.plugin([retry, throttling]))({
   auth: GITHUB_PERSONAL_ACCESS_TOKEN,
   timeZone: "Asia/Tokyo",
   retry: {
-    doNotRetry: ["429"]
+    doNotRetry: ["429"],
   },
   throttle: {
     onAbuseLimit: (_, options): void => {
@@ -33,8 +33,8 @@ const octokit = new (Octokit.plugin([retry, throttling]))({
         octokit.log.info(`Retrying after ${retryAfter} seconds`);
         return true;
       }
-    }
-  }
+    },
+  },
 });
 
 // Helper Functions
@@ -50,7 +50,7 @@ const addAssignees = (
     assignees,
     issue_number: issue, // eslint-disable-line @typescript-eslint/camelcase
     owner,
-    repo
+    repo,
   });
 };
 
@@ -65,7 +65,7 @@ const createComment = (
     body,
     issue_number: issue, // eslint-disable-line @typescript-eslint/camelcase
     owner,
-    repo
+    repo,
   });
 };
 
@@ -80,7 +80,7 @@ const createReviewRequest = (
     pull_number: pull, // eslint-disable-line @typescript-eslint/camelcase
     owner,
     repo,
-    reviewers
+    reviewers,
   });
 };
 
@@ -99,7 +99,7 @@ export const onCreateIssue = async (
 
   const {
     issue,
-    repository: { full_name: repository }
+    repository: { full_name: repository },
   } = payload;
   const assignees = [issue.user.login];
 
@@ -121,7 +121,7 @@ export const onCreatePullRequest = async (
 
   const {
     pull_request: pullRequest,
-    repository: { full_name: repository }
+    repository: { full_name: repository },
   } = payload;
   const assignees = [pullRequest.user.login];
   const reviewers = [];

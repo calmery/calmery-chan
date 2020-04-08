@@ -1,1 +1,1 @@
-it("Dummy", done => done());
+it("Dummy", (done) => done());

@@ -5,7 +5,7 @@ import {
   onCreatePullRequest,
   onCreateIssue,
   isIssue,
-  isPullRequest
+  isPullRequest,
 } from "./helpers";
 
 const checkSecretToken = (request: NowRequest): boolean => {

@@ -1,6 +1,6 @@
 import { retry } from "@octokit/plugin-retry";
 import { throttling } from "@octokit/plugin-throttling";
-import Octokit from "@octokit/rest";
+import { Octokit } from "@octokit/rest";
 import {
   WebhookPayloadIssues,
   WebhookPayloadPullRequest,
@@ -43,7 +43,7 @@ const addAssignees = (
   repository: string,
   issue: number,
   assignees: string[]
-): Promise<Octokit.Response<Octokit.IssuesAddAssigneesResponse>> => {
+) => {
   const [owner, repo] = repository.split("/");
 
   return octokit.issues.addAssignees({
@@ -58,7 +58,7 @@ const createComment = (
   repository: string,
   issue: number,
   body: string
-): Promise<Octokit.Response<Octokit.IssuesCreateCommentResponse>> => {
+) => {
   const [owner, repo] = repository.split("/");
 
   return octokit.issues.createComment({
@@ -73,7 +73,7 @@ const createReviewRequest = (
   repository: string,
   pull: number,
   reviewers: string[]
-): Promise<Octokit.Response<Octokit.PullsCreateReviewRequestResponse>> => {
+) => {
   const [owner, repo] = repository.split("/");
 
   return octokit.pulls.createReviewRequest({

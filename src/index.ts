@@ -1,5 +1,5 @@
 import * as crypto from "crypto";
-import { NowRequest, NowResponse } from "@now/node";
+import { NowRequest, NowResponse } from "@vercel/node";
 import { GITHUB_WEBHOOK_SECRET } from "./constants";
 import {
   onCreatePullRequest,

@@ -1,10 +1,7 @@
 import { retry } from "@octokit/plugin-retry";
 import { throttling } from "@octokit/plugin-throttling";
 import { Octokit } from "@octokit/rest";
-import {
-  WebhookPayloadIssues,
-  WebhookPayloadPullRequest,
-} from "@octokit/webhooks";
+import { EventPayloads } from "@octokit/webhooks";
 import {
   GITHUB_PERSONAL_ACCESS_TOKEN,
   ON_CREATE_ISSUE_COMMENT,
@@ -12,7 +9,7 @@ import {
   REPOSITORY_OWNER_ID,
 } from "./constants";
 
-const octokit = new (Octokit.plugin([retry, throttling]))({
+const octokit = new (Octokit.plugin(retry, throttling))({
   auth: GITHUB_PERSONAL_ACCESS_TOKEN,
   timeZone: "Asia/Tokyo",
   retry: {
@@ -76,7 +73,7 @@ const createReviewRequest = (
 ) => {
   const [owner, repo] = repository.split("/");
 
-  return octokit.pulls.createReviewRequest({
+  return octokit.pulls.requestReviewers({
     pull_number: pull, // eslint-disable-line @typescript-eslint/camelcase
     owner,
     repo,
@@ -84,16 +81,16 @@ const createReviewRequest = (
   });
 };
 
-export const isIssue = (payload): payload is WebhookPayloadIssues =>
+export const isIssue = (payload): payload is EventPayloads.WebhookPayloadIssues =>
   payload.issue !== undefined;
 
-export const isPullRequest = (payload): payload is WebhookPayloadPullRequest =>
+export const isPullRequest = (payload): payload is EventPayloads.WebhookPayloadPullRequest =>
   payload.pull_request !== undefined;
 
 // Events
 
 export const onCreateIssue = async (
-  payload: WebhookPayloadIssues
+  payload: EventPayloads.WebhookPayloadIssues
 ): Promise<void> => {
   /* eslint-disable @typescript-eslint/camelcase */
 
@@ -115,7 +112,7 @@ export const onCreateIssue = async (
 };
 
 export const onCreatePullRequest = async (
-  payload: WebhookPayloadPullRequest
+  payload: EventPayloads.WebhookPayloadPullRequest
 ): Promise<void> => {
   /* eslint-disable @typescript-eslint/camelcase */
 

@@ -3,7 +3,7 @@
     "@octokit/plugin-retry": "3.0.3",
     "@octokit/plugin-throttling": "3.3.0",
     "@octokit/rest": "18.0.5",
-    "@octokit/webhooks": "7.11.2"
+    "@octokit/webhooks": "7.13.1"
   },
   "devDependencies": {
     "@types/jest": "26.0.13",
